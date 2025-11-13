@@ -24,7 +24,7 @@ class SuppressCancelHandler(logging.Filter):
         return True
 
 
-def setup_logger(logfile: str | None = "logs/bot.log", level: str = "DEBUG"):
+def setup_logger(logfile: str | None = "../logs/bot.log", level: str = "DEBUG"):
     logger.remove()
 
     logger.add(

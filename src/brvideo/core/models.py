@@ -1,9 +1,10 @@
 from tortoise import Tortoise, fields
 from tortoise.models import Model
 
-from brvideo.core import enums
-from brvideo.core.config import database_config
-
+try:
+    from brvideo.core import enums
+except ImportError:  # `aerich init` and `aerich init-db` must be run from root, not from src
+    from src.brvideo.core import enums
 
 class Applications(Model):
     id = fields.IntField(primary_key=True)
@@ -29,6 +30,8 @@ class Admins(Model):
 
 
 async def init():
+    from brvideo.core.config import database_config
+
     await Tortoise.init(database_config)
     await Tortoise.generate_schemas()
 
